@@ -1,0 +1,23 @@
+%dw 2.0
+
+type auto_70999b2e_5585_48b6_9e33_62d117c036db_Input_Attributes = {|
+  clientCertificate?: {|
+    publicKey?: {|  |}, 
+    "type"?: String, 
+    encoded?: Binary
+  |}, 
+  headers: {|  |}, 
+  listenerPath: String, 
+  method: String, 
+  queryParams: {|  |}, 
+  queryString: String, 
+  relativePath: String, 
+  remoteAddress: String, 
+  requestPath: String, 
+  requestUri: String, 
+  scheme: String, 
+  uriParams: {| shoppingCartId: String |}, 
+  version: String, 
+  localAddress: String
+|}
+

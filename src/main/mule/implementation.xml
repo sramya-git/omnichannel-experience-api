@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:shopping-cart-process-api="http://www.mulesoft.org/schema/mule/shopping-cart-process-api" 
+	xmlns:retail-customer-system-api="http://www.mulesoft.org/schema/mule/retail-customer-system-api"
+	xmlns:retail-payment-process-api="http://www.mulesoft.org/schema/mule/retail-payment-process-api"
+	xmlns:retail-order-fulfilment-process-api="http://www.mulesoft.org/schema/mule/retail-order-fulfilment-process-api" xmlns:http="http://www.mulesoft.org/schema/mule/http" 
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" 
+	xmlns:retail-shopping-cart-process-api="http://www.mulesoft.org/schema/mule/retail-shopping-cart-process-api" 
+	xmlns:retail-orders-system-api="http://www.mulesoft.org/schema/mule/retail-orders-system-api" 
+	xmlns:retail-partners-system-api="http://www.mulesoft.org/schema/mule/retail-partners-system-api" 
+	xmlns:retail-locations-system-api="http://www.mulesoft.org/schema/mule/retail-locations-system-api" 
+	xmlns:retail-product-availability-process-api="http://www.mulesoft.org/schema/mule/retail-product-availability-process-api" 
+	xmlns:retail-product-system-api="http://www.mulesoft.org/schema/mule/retail-product-system-api" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/retail-product-system-api http://www.mulesoft.org/schema/mule/retail-product-system-api/current/mule-retail-product-system-api.xsd
+http://www.mulesoft.org/schema/mule/retail-product-availability-process-api http://www.mulesoft.org/schema/mule/retail-product-availability-process-api/current/mule-retail-product-availability-process-api.xsd
+http://www.mulesoft.org/schema/mule/retail-locations-system-api http://www.mulesoft.org/schema/mule/retail-locations-system-api/current/mule-retail-locations-system-api.xsd
+http://www.mulesoft.org/schema/mule/retail-partners-system-api http://www.mulesoft.org/schema/mule/retail-partners-system-api/current/mule-retail-partners-system-api.xsd
+http://www.mulesoft.org/schema/mule/retail-orders-system-api http://www.mulesoft.org/schema/mule/retail-orders-system-api/current/mule-retail-orders-system-api.xsd
+http://www.mulesoft.org/schema/mule/retail-shopping-cart-process-api http://www.mulesoft.org/schema/mule/retail-shopping-cart-process-api/current/mule-retail-shopping-cart-process-api.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/retail-order-fulfilment-process-api http://www.mulesoft.org/schema/mule/retail-order-fulfilment-process-api/current/mule-retail-order-fulfilment-process-api.xsd
+http://www.mulesoft.org/schema/mule/retail-payment-process-api http://www.mulesoft.org/schema/mule/retail-payment-process-api/current/mule-retail-payment-process-api.xsd
+http://www.mulesoft.org/schema/mule/retail-customer-system-api http://www.mulesoft.org/schema/mule/retail-customer-system-api/current/mule-retail-customer-system-api.xsd
+http://www.mulesoft.org/schema/mule/shopping-cart-process-api http://www.mulesoft.org/schema/mule/shopping-cart-process-api/current/mule-shopping-cart-process-api.xsd">
+	<shopping-cart-process-api:config name="Shopping_cart_process_API_Config" doc:name="Shopping-cart-process-API Config" doc:id="1eb8a779-4a26-48fe-9cf4-e37e0fb1560c" property_client-id="123" property_client-secret="123" />
+	<flow name="createShoppingCart" doc:id="674709f3-d2bb-43b0-9111-61487df527b5">
+		<shopping-cart-process-api:create-shopping-cart doc:name="Create shopping cart" doc:id="6381e429-a94a-4ab9-b9e3-fe3e8528b9ee" config-ref="Shopping_cart_process_API_Config">
+			<shopping-cart-process-api:create-shopping-cart-request-data ><![CDATA[#[[{
+	customerId: payload.customerId,
+	items: payload.items map {
+		productId: $.item.productId,
+		variantId: $.item.identifier, 
+		quantity: $.quantity.amount,
+		location: $.location 		
+	}
+}]]]]></shopping-cart-process-api:create-shopping-cart-request-data>
+		</shopping-cart-process-api:create-shopping-cart>
+		<logger level="INFO" doc:name="Success operation" doc:id="8f31a7a4-11f5-4203-bffd-0f3f92d7059c" message="Shopping Cart was created" />
+	</flow>
+	<flow name="updateShoppingCart" doc:id="70999b2e-5585-48b6-9e33-62d117c036db">
+		<shopping-cart-process-api:update-shopping-cart-by-shopping-cart-id doc:name="Update shopping cart by shopping cart id" doc:id="f2ac5a9d-5483-49ef-9bf6-c4805298b752" shopping-cart-id="#[attributes.uriParams.shoppingCartId]" config-ref="Shopping_cart_process_API_Config">
+			<shopping-cart-process-api:update-shopping-cart-by-shopping-cart-id-request-data ><![CDATA[#[items: payload.items map {
+		productId: $.item.productId,
+		variantId: $.item.identifier, 
+		quantity: $.quantity.amount,
+		location: $.location 		
+	}]]]></shopping-cart-process-api:update-shopping-cart-by-shopping-cart-id-request-data>
+		</shopping-cart-process-api:update-shopping-cart-by-shopping-cart-id>
+		<logger level="INFO" doc:name="Success operation" doc:id="638031ab-d3e4-414d-8a88-1ee0369bd379" message="Shopping Cart was updated" />
+	</flow>
+</mule>

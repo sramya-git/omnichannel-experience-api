@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:retail-customer-system-api="http://www.mulesoft.org/schema/mule/retail-customer-system-api"
+	xmlns:retail-payment-process-api="http://www.mulesoft.org/schema/mule/retail-payment-process-api"
+	xmlns:retail-order-fulfilment-process-api="http://www.mulesoft.org/schema/mule/retail-order-fulfilment-process-api"
+	xmlns:retail-locations-system-api="http://www.mulesoft.org/schema/mule/retail-locations-system-api"
+	xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" 
+	xmlns:retail-shopping-cart-process-api="http://www.mulesoft.org/schema/mule/retail-shopping-cart-process-api" 
+	xmlns:retail-partners-system-api="http://www.mulesoft.org/schema/mule/retail-partners-system-api" 
+	xmlns:retail-orders-system-api="http://www.mulesoft.org/schema/mule/retail-orders-system-api" 
+	xmlns:retail-product-availability-process-api="http://www.mulesoft.org/schema/mule/retail-product-availability-process-api" 
+	xmlns:retail-product-system-api="http://www.mulesoft.org/schema/mule/retail-product-system-api" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd 
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/retail-product-system-api http://www.mulesoft.org/schema/mule/retail-product-system-api/current/mule-retail-product-system-api.xsd
+http://www.mulesoft.org/schema/mule/retail-product-availability-process-api http://www.mulesoft.org/schema/mule/retail-product-availability-process-api/current/mule-retail-product-availability-process-api.xsd
+http://www.mulesoft.org/schema/mule/retail-orders-system-api http://www.mulesoft.org/schema/mule/retail-orders-system-api/current/mule-retail-orders-system-api.xsd
+http://www.mulesoft.org/schema/mule/retail-customer-system-api http://www.mulesoft.org/schema/mule/retail-customer-system-api/current/mule-retail-customer-system-api.xsd
+http://www.mulesoft.org/schema/mule/retail-partners-system-api http://www.mulesoft.org/schema/mule/retail-partners-system-api/current/mule-retail-partners-system-api.xsd
+http://www.mulesoft.org/schema/mule/retail-shopping-cart-process-api http://www.mulesoft.org/schema/mule/retail-shopping-cart-process-api/current/mule-retail-shopping-cart-process-api.xsd
+http://www.mulesoft.org/schema/mule/retail-locations-system-api http://www.mulesoft.org/schema/mule/retail-locations-system-api/current/mule-retail-locations-system-api.xsd
+http://www.mulesoft.org/schema/mule/retail-order-fulfilment-process-api http://www.mulesoft.org/schema/mule/retail-order-fulfilment-process-api/current/mule-retail-order-fulfilment-process-api.xsd
+http://www.mulesoft.org/schema/mule/retail-payment-process-api http://www.mulesoft.org/schema/mule/retail-payment-process-api/current/mule-retail-payment-process-api.xsd">
+	
+	<global-property doc:name="Global Property" doc:id="77e37e3d-f7cb-480c-bb81-0c55e14bb752" name="mule.env" value="dev" />
+	 <http:listener-config name="omnichannel-experience-api-httpListenerConfig">
+        <http:listener-connection host="0.0.0.0" port="8081" />
+    </http:listener-config>
+    <apikit:config name="omnichannel-experience-api-config" api="resource::2580118e-2b61-412c-bdba-fdfc79191ee6:omnichannel-experience-api:1.0.0:raml:zip:omnichannel-experience-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <configuration-properties doc:name="Configuration properties" doc:id="1df5e889-716f-4c69-9688-3a3241e85a32" file="common.properties" />
+	<configuration-properties doc:name="Configuration properties" doc:id="0d1c9ed3-0a5d-4e37-afa6-8d12a336b1da" file="mule.${mule.env}.properties" />		
+	
+</mule>
