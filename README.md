@@ -20,85 +20,11 @@ Please review the terms of the license before downloading and using this templat
 
 As a Customer I want a service to request information about me (personal information, my billing and shipping address, my payment methods), information about provided products, shopping carts and orders. 
 
-### GET/customers/{customerId}
-This endpoint will trigger flow getCustomer which obtains a customer information by customerId. 
-
-### PUT/customers/{customerId}
-This endpoint will trigger flow putCustomerFromSFDC which updates a customer information by customerId. 
-
-### GET/channels
-This endpoint will obtains mocked information about supported channels. 
-The main point is to support the most common channels to cover use-cases with WEB, mobile and brick-and-mortar(store) based application delivering the Omnichannel user experience.
-
-### GET/channels/{channelId}
-This endpoint obtains mocked information about particular channel by channelId.
-
-### GET/channels/{channelId}/paymentMethods
-This endpoint obtains mocked information about payment methods by channelId. 
-Channels basically could have different payment methods according to channel type like VISA card, bank transfer, cash. 
-
-### GET/products
-This endpoint will trigger flow getProducts which obtains information about products from Product System API. 
-
-### GET/products/{productId}
-This endpoint will trigger flow getProduct which obtains information about product from Product System API by productId. 
-
-### GET/products/{productId}/variants
-This endpoint will trigger flow getVariantsByProduct which obtains information about variants of product from Product System API by productId.
-
-### GET/products/{productId}/variants/{variantId}
-This endpoint will trigger flow getVariant which obtains information about variant of product by productId and variantId.
-
-### GET/products/{productId}/variants/{variantId}/availability
-This endpoint will trigger flow getAvailability which obtains information about availability of variant by productId and variantId.
-
-### GET/categories
-This endpoint will trigger flow getCategories which obtains information about categories from Product System API.
-
-### GET/categories/{categoryId}
-This endpoint will trigger flow getCategory which obtains information about category from Product System API by categoryId.
-
-### GET/categories/{categoryId}/products
-This endpoint will trigger flow getProductsByCategory which obtains information about products from same category by categoryId.
-
-### GET/shoppingCarts/{shoppingCartId}
-This endpoint will trigger flow getShoppingCart which obtains information about products in shopping cart by shoppingCartId.
-
 ### PUT/shoppingCarts/{shoppingCartId}
 This endpoint will trigger flow putShoppingCart which updates information about products in shopping cart by shoppingCartId.
 
 ### POST/shoppingCarts/
 This endpoint will trigger flow get which saved new shopping cart to the object store.
-
-### DELETE/shoppingCarts/{shoppingCartId}
-This endpoint will trigger flow deleteShoppingCart which removes shopping cart from object store by shoppingCartId.
-
-### GET/customers/{customerId}/shoppingCarts/
-This endpoint will trigger flow getShoppingCartsForCustomer which obtains list of shopping cart for customer by the customerId. If customer does not exist, response is empty field.  
-
-### POST/orders/
-This endpoint will trigger flow createOrder which creates new order by customer.
-
-### PUT/orders/{salesOrderId}
-This endpoint will trigger flow updateOrder which updates order.
-
-### POST/orders/{salesOrderId}/payment
-This endpoint will trigger flow createPaymentFlow which creates a new payment for an order.
-
-### GET/customers/{customerId}/orders/
-This endpoint will trigger flow getOrdersByCustomer which obtains list of orders for customer by customerId.
-
-### GET/stores
-This endpoint will trigger flow getStores which obtains list of stores.
-
-### GET/stores/{storeId}
-This endpoint will trigger flow getStore which obtains store by the storeId.
-
-### GET/partners
-This endpoint will trigger flow getPartners which obtains list of partner stores.
-
-### GET/partners/{partnerId}
-This endpoint will trigger flow getPartner which obtains partner store by the partnerId.
 
 # Considerations <a name="considerations"/>
 
@@ -156,56 +82,10 @@ Detailed list with examples:
 ### Application properties
 + http.port `8081`
 
-####Customer system API
-+ customers-system-api.host `customer.example.com`
-+ customers-system-api.port `80`
-+ customers-system-api.basePath `/api`
-+ customers-system-api.protocol `HTTP`
-
-####Product system API
-+ product-system-api.host `product.example.com`
-+ product-system-api.port `80`
-+ product-system-api.basePath `/api`
-+ product-system-api.protocol `HTTP`
-
-####Product Availability process API
-+ product-availability-process-api.host `availability.example.com`
-+ product-availability-process-api.port `80`
-+ product-availability-process-api.basePath `/api`
-+ product-availability-process-api.protocol `HTTP`
-
-####Orders system API
-+ orders-system-api.host `order.example.com`
-+ orders-system-api.port `80`
-+ orders-system-api.basePath `/api`
-+ order-system-api.protocol `HTTP`
-
-####Order fulfillment proces API
-+ order-fulfilment-process-api.host `order-fulfillment.example.com`
-+ order-fulfilment-process-api.port `80`
-+ order-fulfilment-process-api.basePath `/api`
-+ order-fulfilment-process-api.protocol `HTTP`
-
 ####Shopping Cart proces API
 + shopping-cart-proces-api.host `shopping-cart.example.com`
 + shopping-cart-proces-api.port `80`
 + shopping-cart-proces-api.basePath `/api`
 + shopping-cart-process-api.protocol `HTTP`
 
-####Locations system API
-+ locations-system-api.host `locations.example.com`
-+ locations-system-api.port `80`
-+ locations-system-api.basePath `/api`
-+ locations-system-api.protocol `HTTP`
 
-####Partners system API
-+ partners-system-api.host `partners.example.com`
-+ partners-system-api.port `80`
-+ partners-system-api.basePath `/api`
-+ partners-system-api.protocol `HTTP`
-
-####Partners system API
-+ payment-process-api.host `payment.example.com`
-+ payment-process-api.port `80`
-+ payment-process-api.basePath `/api`
-+ payment-process-api.protocol `HTTP`
